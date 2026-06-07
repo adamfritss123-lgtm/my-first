@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مفاجأة لفاطمة</title>
+    <style>
+        body { margin: 0; background: linear-gradient(to bottom, #ffc0cb, #ff69b4); height: 100vh; display: flex; justify-content: center; align-items: center; font-family: sans-serif; overflow: hidden; }
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); color: white; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 999; text-align: center; }
+        .container { background: white; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 80%; max-width: 400px; position: relative; }
+        .hidden { display: none; }
+        button { padding: 12px 25px; cursor: pointer; border-radius: 20px; border: none; background: #ff69b4; color: white; margin: 10px; font-size: 1.1rem; }
+        .btn-no { background: #9e9e9e; position: relative; }
+    </style>
+</head>
+<body>
+
+    <div id="overlay" onclick="startAudio()"><h1>اضغطي هنا يا فطوشتي لبدء المفاجأة ❤️</h1></div>
+
+    <audio id="music" loop>
+        <source src="https://files.catbox.moe/emp303.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <div id="stage-1">
+            <h1>فاطمة تحبيني لو لا؟ 💕</h1>
+            <button onclick="nextStage(2)">أي</button>
+            <button class="btn-no" onmouseover="runAway(this)">لا</button>
+        </div>
+        
+        <div id="stage-2" class="hidden">
+            <h1>وهل أنتِ متأكدة من أنكِ تقدرين الصبر على غيرتي؟</h1>
+            <button onclick="nextStage(3)">أستطيع</button>
+            <button class="btn-no" onmouseover="runAway(this)">لا</button>
+        </div>
+        
+        <div id="stage-3" class="hidden">
+            <h1>هل أنتِ متأكدة؟</h1>
+            <button onclick="nextStage(4)">نعم</button>
+            <button class="btn-no" onmouseover="runAway(this)">لا</button>
+        </div>
+        
+        <div id="stage-4" class="hidden">
+            <p>كنت أعرف ذلك، شكراً لوضعك ثقتك بي، أعدك بأني لن أخونكِ، إني أحبك جداً يا فطوشتي 💕</p>
+        </div>
+    </div>
+
+    <script>
+        function startAudio() {
+            const audio = document.getElementById('music');
+            audio.play();
+            document.getElementById('overlay').style.display = 'none';
+        }
+        
+        function runAway(btn) {
+            btn.style.position = 'absolute';
+            btn.style.top = Math.random() * 80 + 'vh';
+            btn.style.left = Math.random() * 80 + 'vw';
+        }
+        
+        function nextStage(n) {
+            document.querySelectorAll('.container > div').forEach(d => d.classList.add('hidden'));
+            document.getElementById('stage-' + n).classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
